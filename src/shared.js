@@ -7,7 +7,10 @@ module.exports = {
         const inputLines = inputText.split("\n");
 
         if(callback){
-            return inputLines.map(callback);
+            return inputLines.map((line) => {
+                const strippedLine = line.trim();
+                return callback(strippedLine);
+            });
         }
 
         return inputLines;
