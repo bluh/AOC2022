@@ -1,12 +1,8 @@
-const fs = require("fs");
-
-const inputFile = fs.readFileSync("data//day1.txt");
-const inputText = inputFile.toString()
-const inputLines = inputText.split("\n");
+const { readLines } = require("./shared");
 
 const elves = [0];
 var elfIndex = 0;
-inputLines.forEach(line => {
+readLines("day1", (line) => {
     const trimmedLine = line.trim();
     if(trimmedLine === ""){
         elves[++elfIndex] = 0;

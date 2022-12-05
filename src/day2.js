@@ -1,8 +1,4 @@
-const fs = require("fs");
-
-const inputFile = fs.readFileSync("data/day2.txt");
-const inputText = inputFile.toString()
-const inputLines = inputText.split("\n");
+const { readLines } = require("./shared");
 
 var score = 0;
 
@@ -13,7 +9,7 @@ const mineMap = { X: "R", Y: "P", Z: "S" };
 
 // Part 1
 
-inputLines.forEach(line => {
+readLines("day2", line => {
     const [ theirs, mine ] = line.split(" ");
 
     const theirsRPS = theirsMap[theirs.trim()];
@@ -40,7 +36,7 @@ score = 0;
 const winMap = { R: "P", P: "S", S: "R" };
 const loseMap = { R: "S", P: "R", S: "P"};
 
-inputLines.forEach(line => {
+readLines("day2", line => {
     const [ theirs, mine ] = line.trim().split(" ");
 
     const theirsRPS = theirsMap[theirs.trim()];
