@@ -14,6 +14,18 @@ function* splitTextIntoChunks(text, chunkSize){
     }
 }
 
+function* flatten(object, path) {
+    path = path || "$";
+    for (const key in object) {
+        const value = object[key];
+        if(typeof value === "object"){
+            yield* flatten(object[key], `${path}['${key}']`);
+        }else{
+            yield { path, key, value };
+        }
+    }
+}
+
 module.exports = {
     readLines: (fileName, callback) => {
         const inputFile = fs.readFileSync(`data//${fileName}.txt`);
@@ -29,5 +41,15 @@ module.exports = {
 
         return inputLines;
     },
-    splitTextIntoChunks
+    readChars: (fileName, callback) => {
+        const inputFile = fs.readFileSync(`data//${fileName}.txt`);
+        const inputText = inputFile.toString();
+        
+        var charIndex = 0;
+        for (const char of inputText) {
+            callback(char, charIndex++);
+        }
+    },
+    splitTextIntoChunks,
+    flatten
 }
