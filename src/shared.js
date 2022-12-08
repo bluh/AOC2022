@@ -26,6 +26,17 @@ function* flatten(object, path) {
     }
 }
 
+Array.prototype.add = function(other){
+    return this.map((v,i) => v + other[i]);
+}
+
+const DIRECTIONS = {
+    NORTH: 1,
+    EAST: 2,
+    SOUTH: 3,
+    WEST: 4
+}
+
 module.exports = {
     readLines: (fileName, callback) => {
         const inputFile = fs.readFileSync(`data//${fileName}.txt`);
@@ -51,5 +62,13 @@ module.exports = {
         }
     },
     splitTextIntoChunks,
-    flatten
+    flatten,
+    DIRECTIONS,
+    DIRECTIONS_LIST: [DIRECTIONS.NORTH, DIRECTIONS.EAST, DIRECTIONS.SOUTH, DIRECTIONS.WEST],
+    DIRECTIONS_VEC: {
+        [DIRECTIONS.NORTH]: [0, -1],
+        [DIRECTIONS.SOUTH]: [0 ,1],
+        [DIRECTIONS.WEST]: [-1, 0],
+        [DIRECTIONS.EAST]: [1, 0]
+    }
 }
